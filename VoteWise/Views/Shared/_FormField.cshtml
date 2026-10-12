@@ -1,0 +1,14 @@
+@model FormFieldViewModel
+
+<div class="form-field">
+    <label class="form-field__label" for="@Model.Id">
+        @Html.Icon(Model.Icon)
+        <span>@Model.Label</span>
+    </label>
+    <input class="form-field__input"
+           id="@Model.Id"
+           name="@Model.Id"
+           type="@Model.Type"
+           autocomplete="@Model.Autocomplete"
+           placeholder="@Model.Placeholder" />
+</div>

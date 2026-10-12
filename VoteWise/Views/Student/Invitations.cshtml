@@ -1,0 +1,24 @@
+@model IReadOnlyList<ListCardViewModel>
+@{
+    ViewData["Title"] = "Organization Invitations";
+    ViewData["ActiveNav"] = "Organizations";
+}
+
+<header class="page-head">
+    <h1 class="page-head__title">Explore Organizations</h1>
+    <p class="page-head__text">Find your community. Participate in your organization's elections.</p>
+</header>
+
+<partial name="_Tabs" model='new[] {
+    new TabItem("My Organizations", "Organizations"),
+    new TabItem("Join an Organization", "JoinOrganization"),
+    new TabItem("Invitations", "Invitations", true) }' />
+
+<section class="page-body">
+    <div class="card-stack">
+        @foreach (var invitation in Model)
+        {
+            <partial name="_ListCard" model="invitation" />
+        }
+    </div>
+</section>

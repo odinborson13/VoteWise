@@ -1,0 +1,20 @@
+@model PositionResultViewModel
+
+@* Ranked vote counts for one position. *@
+<section class="result-card">
+    <h2 class="result-card__title">@Model.Position</h2>
+
+    <ol class="result-list">
+        @foreach (var entry in Model.Entries)
+        {
+            <li class="result-row @(entry.Rank == 1 ? "is-leading" : "")">
+                <span class="result-row__rank">@entry.Rank</span>
+                <span class="result-row__candidate">
+                    <span class="result-row__name">@entry.Name</span>
+                    <span class="result-row__party">@entry.Party</span>
+                </span>
+                <span class="result-row__votes">@entry.Votes.ToString("N0")</span>
+            </li>
+        }
+    </ol>
+</section>

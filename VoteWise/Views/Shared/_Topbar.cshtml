@@ -1,0 +1,13 @@
+@* Top bar showing the signed-in user. Name and ID come from the folder's _ViewStart (sample data). *@
+<header class="topbar">
+    <div class="topbar__user">
+        <span class="avatar" aria-hidden="true">@Html.Icon("user")</span>
+        <div class="topbar__identity">
+            <span class="topbar__name">@ViewData["UserName"]</span>
+            @if (!string.IsNullOrEmpty(ViewData["UserId"] as string))
+            {
+                <span class="topbar__id">@ViewData["UserId"]</span>
+            }
+        </div>
+    </div>
+</header>

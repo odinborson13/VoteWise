@@ -1,0 +1,884 @@
+/* ==========================================================================
+   VoteWise - site styles
+   Sections:
+     1. Design tokens
+     2. Base / reset
+     3. Layout helpers
+     4. Buttons
+     5. Header & navigation
+     6. Landing page (hero, features, polling places, results, footer)
+     7. Auth pages (role selection, forms)
+     8. Responsive adjustments
+   ========================================================================== */
+
+
+/* 1. Design tokens
+   -------------------------------------------------------------------------- */
+:root {
+    /* Brand colors (taken from the VoteWise UI design) */
+    --navy-950: #05053f;
+    --navy-900: #0a0a5c;
+    --navy-700: #1c1c78;
+    --gold-500: #f5b400;
+    --gold-600: #dc9e00;
+    --blue-600: #0b4dae;
+    --sky-100: #e4eefb;
+    --sky-50: #f4f8fe;
+
+    /* Neutrals */
+    --ink: #0a0a3a;
+    --muted: #5a5f73;
+    --line: #d5def0;
+    --white: #ffffff;
+    --success: #16a34a;
+
+    /* Typography */
+    --font-sans: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+    /* Shape & depth */
+    --radius-sm: 12px;
+    --radius-md: 20px;
+    --radius-lg: 28px;
+    --radius-pill: 999px;
+    --shadow-sm: 0 1px 2px rgb(10 10 92 / 8%), 0 2px 6px rgb(10 10 92 / 6%);
+    --shadow-md: 0 8px 24px rgb(10 10 92 / 12%);
+    --shadow-lg: 0 24px 60px rgb(5 5 63 / 35%);
+
+    /* Reusable gradient used on hero, auth pages and polling section */
+    --navy-gradient: linear-gradient(135deg, var(--navy-950) 0%, var(--navy-900) 45%, var(--navy-700) 100%);
+}
+
+
+/* 2. Base / reset
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--sky-100);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p, ul {
+    margin: 0;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+img,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+:focus-visible {
+    outline: 3px solid var(--gold-500);
+    outline-offset: 3px;
+}
+
+.icon {
+    width: 1.25em;
+    height: 1.25em;
+    flex-shrink: 0;
+}
+
+.text-gold {
+    color: var(--gold-500);
+}
+
+
+/* 3. Layout helpers
+   -------------------------------------------------------------------------- */
+.container {
+    width: min(1120px, 100% - 3rem);
+    margin-inline: auto;
+}
+
+.section {
+    padding-block: 5rem;
+}
+
+.section--light {
+    background: var(--sky-100);
+}
+
+.section--navy {
+    background: var(--navy-gradient);
+    color: var(--white);
+}
+
+.section__header {
+    margin-bottom: 2.5rem;
+}
+
+.section__header--center {
+    text-align: center;
+}
+
+.section__title {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+}
+
+.section__title--light {
+    color: var(--white);
+}
+
+.section__subtitle {
+    margin-top: 0.5rem;
+    font-size: 1.05rem;
+    color: var(--muted);
+}
+
+.section__subtitle--light {
+    color: rgb(255 255 255 / 80%);
+}
+
+
+/* 4. Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--navy-900);
+    border: 2px solid transparent;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn--gold {
+    background: var(--gold-500);
+    box-shadow: 0 6px 16px rgb(245 180 0 / 35%);
+}
+
+.btn--gold:hover {
+    background: var(--gold-600);
+    box-shadow: 0 8px 20px rgb(245 180 0 / 45%);
+}
+
+.btn--outline {
+    background: transparent;
+    border-color: var(--navy-900);
+}
+
+.btn--outline:hover {
+    background: var(--navy-900);
+    color: var(--white);
+}
+
+.btn--sm {
+    padding: 0.5rem 1.1rem;
+    font-size: 0.85rem;
+}
+
+.btn--lg {
+    padding: 0.95rem 2.25rem;
+    font-size: 1.05rem;
+}
+
+.btn--block {
+    width: 100%;
+}
+
+
+/* 5. Header & navigation
+   -------------------------------------------------------------------------- */
+.site-header {
+    position: relative;
+    z-index: 10;
+    padding: 1.5rem 1.5rem 0;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    width: min(1120px, 100%);
+    margin-inline: auto;
+    padding: 0.6rem 1.25rem;
+    background: var(--white);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-md);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.brand__seal {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.brand__text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.brand__name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--navy-900);
+}
+
+.brand__tagline {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--gold-600);
+}
+
+.navbar__links {
+    display: flex;
+    align-items: center;
+    gap: 2.25rem;
+}
+
+.navbar__link {
+    position: relative;
+    padding-block: 0.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--navy-900);
+}
+
+/* Animated gold underline on hover */
+.navbar__link::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: -2px;
+    height: 2px;
+    background: var(--gold-500);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+}
+
+.navbar__link:hover::after {
+    transform: scaleX(1);
+}
+
+
+/* 6. Landing page
+   -------------------------------------------------------------------------- */
+
+/* On the landing page the navbar floats over the hero. */
+.page-landing .site-header {
+    position: absolute;
+    inset: 0 0 auto 0;
+}
+
+/* --- Hero --- */
+.hero {
+    position: relative;
+    padding: 11rem 0 6rem;
+    color: var(--white);
+    background:
+        radial-gradient(circle at 85% 20%, rgb(245 180 0 / 14%), transparent 40%),
+        radial-gradient(circle at 70% 90%, rgb(60 90 220 / 35%), transparent 45%),
+        var(--navy-gradient);
+}
+
+.hero__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.hero__title {
+    max-width: 14ch;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.hero__lead {
+    max-width: 52ch;
+    font-size: 1.1rem;
+    color: rgb(255 255 255 / 85%);
+}
+
+.hero .btn {
+    margin-top: 0.75rem;
+}
+
+/* --- Feature cards --- */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+}
+
+.feature-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2.25rem 1.75rem;
+    text-align: center;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--blue-600);
+    box-shadow: var(--shadow-md);
+}
+
+.feature-card__icon {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1.25rem;
+    color: var(--white);
+    background: var(--blue-600);
+    border-radius: 50%;
+}
+
+.feature-card__icon .icon {
+    width: 30px;
+    height: 30px;
+}
+
+.feature-card__title {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--blue-600);
+}
+
+.feature-card__text {
+    font-size: 0.92rem;
+    color: var(--muted);
+}
+
+/* --- Polling place table --- */
+.table-card {
+    overflow: hidden;
+    background: var(--sky-100);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+}
+
+.polling-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--ink);
+}
+
+.polling-table th,
+.polling-table td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+}
+
+.polling-table thead th {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--navy-900);
+    background: var(--gold-500);
+}
+
+.polling-table tbody tr + tr {
+    border-top: 1px solid var(--line);
+}
+
+.polling-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.polling-table tbody tr:hover {
+    background: var(--sky-50);
+}
+
+.polling-table tbody th {
+    font-weight: 600;
+}
+
+.polling-table__location {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.polling-table__location .icon {
+    color: var(--blue-600);
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+}
+
+.status::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: var(--success);
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgb(22 163 74 / 20%);
+}
+
+/* --- Election results banner --- */
+.results-banner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    padding: 1.25rem 1.5rem;
+    color: var(--ink);
+    background: var(--sky-100);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.results-banner__icon {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    color: var(--white);
+    background: var(--blue-600);
+    border-radius: 50%;
+}
+
+.results-banner__icon .icon {
+    width: 30px;
+    height: 30px;
+}
+
+.results-banner__body {
+    flex: 1;
+}
+
+.results-banner__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--blue-600);
+}
+
+.results-banner__text {
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+/* --- Footer --- */
+.site-footer {
+    padding-block: 3rem;
+    background: var(--sky-100);
+    border-top: 1px solid var(--line);
+}
+
+.site-footer__inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 2rem;
+    width: min(1120px, 100% - 3rem);
+    margin-inline: auto;
+}
+
+.brand--footer .brand__name {
+    font-size: 1.25rem;
+}
+
+.brand__tagline--muted {
+    color: var(--muted);
+}
+
+.site-footer__blurb {
+    max-width: 34ch;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.site-footer__heading {
+    margin-bottom: 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.site-footer__nav li + li {
+    margin-top: 0.4rem;
+}
+
+.site-footer__nav a {
+    font-size: 0.9rem;
+    color: var(--muted);
+    transition: color 0.15s ease;
+}
+
+.site-footer__nav a:hover {
+    color: var(--blue-600);
+}
+
+.site-footer__legal {
+    font-size: 0.9rem;
+    color: var(--muted);
+    text-align: right;
+}
+
+
+/* 7. Auth pages (role selection, sign up, sign in)
+   -------------------------------------------------------------------------- */
+.page-auth {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 85% 10%, rgb(245 180 0 / 10%), transparent 40%),
+        var(--navy-gradient);
+    background-attachment: fixed;
+}
+
+.page-auth main {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1.5rem 4rem;
+}
+
+/* --- Role selection panel --- */
+.auth-panel {
+    width: min(1120px, 100%);
+    padding: 3rem 2rem 3.5rem;
+    text-align: center;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.auth-panel--wide {
+    align-self: flex-start;
+}
+
+.auth-panel__title {
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--navy-900);
+}
+
+.auth-panel__subtitle {
+    margin-top: 0.25rem;
+    color: var(--muted);
+}
+
+.role-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 280px));
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 2.5rem;
+}
+
+.role-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 2rem 1.5rem;
+    color: var(--navy-900);
+    background: var(--white);
+    border: 3px solid var(--gold-500);
+    border-radius: var(--radius-lg);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.role-card:hover {
+    transform: translateY(-6px);
+    background: var(--sky-50);
+    box-shadow: 0 16px 36px rgb(245 180 0 / 30%);
+}
+
+.role-card__icon .icon {
+    width: 120px;
+    height: 120px;
+    stroke-width: 1.5;
+}
+
+.role-card__label {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.role-card__hint {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+/* --- Account form card --- */
+.auth-card {
+    width: min(520px, 100%);
+    align-self: flex-start;
+    padding: 2.25rem 2.25rem 2rem;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+}
+
+.auth-card--narrow {
+    width: min(460px, 100%);
+}
+
+.auth-card__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.auth-card__icon {
+    display: grid;
+    place-items: center;
+    width: 56px;
+    height: 56px;
+    color: var(--navy-900);
+    background: var(--sky-100);
+    border-radius: 50%;
+}
+
+.auth-card__icon .icon {
+    width: 28px;
+    height: 28px;
+}
+
+.auth-card__title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--navy-900);
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.auth-form .btn {
+    margin-top: 0.5rem;
+}
+
+/* --- Form field (see Views/Shared/_FormField.cshtml) --- */
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-field__label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--navy-900);
+}
+
+.form-field__label .icon {
+    width: 1.1em;
+    height: 1.1em;
+}
+
+.form-field__input {
+    width: 100%;
+    padding: 0.7rem 1.15rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--sky-100);
+    border: 1.5px solid var(--navy-900);
+    border-radius: var(--radius-pill);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.form-field__input:hover {
+    background: var(--sky-50);
+}
+
+.form-field__input:focus {
+    outline: none;
+    background: var(--white);
+    border-color: var(--blue-600);
+    box-shadow: 0 0 0 4px rgb(11 77 174 / 18%);
+}
+
+/* --- "or" divider and switch link --- */
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+}
+
+.auth-card__switch {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    color: var(--navy-900);
+}
+
+.auth-card__switch a {
+    font-weight: 700;
+    color: var(--gold-600);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.auth-card__switch a:hover {
+    color: var(--navy-900);
+}
+
+
+/* 8. Responsive adjustments
+   -------------------------------------------------------------------------- */
+@media (max-width: 960px) {
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .site-footer__inner {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .site-footer__legal {
+        text-align: left;
+    }
+}
+
+@media (max-width: 720px) {
+    .site-header {
+        padding: 1rem 1rem 0;
+    }
+
+    .navbar {
+        padding: 0.5rem 0.9rem;
+    }
+
+    /* Keep the bar compact: hide secondary links and the tagline. */
+    .navbar__links,
+    .brand__tagline {
+        display: none;
+    }
+
+    .hero {
+        padding: 8rem 0 4rem;
+    }
+
+    .section {
+        padding-block: 3.5rem;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .role-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .role-card__icon .icon {
+        width: 88px;
+        height: 88px;
+    }
+
+    .polling-table th,
+    .polling-table td {
+        padding: 0.85rem 0.9rem;
+        font-size: 0.85rem;
+    }
+
+    .polling-table__location .icon {
+        display: none;
+    }
+
+    .results-banner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .site-footer__inner {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-card {
+        padding: 1.75rem 1.25rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        scroll-behavior: auto !important;
+    }
+}

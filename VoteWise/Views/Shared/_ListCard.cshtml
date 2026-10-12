@@ -1,0 +1,47 @@
+@model ListCardViewModel
+@{
+    var controllerName = ViewData["NavController"] as string ?? "Student";
+}
+
+@* Rounded row with text on the left and optional buttons on the right. *@
+<article class="list-card">
+    <div class="list-card__body">
+        <h2 class="list-card__title">@Model.Title</h2>
+
+        @if (!string.IsNullOrEmpty(Model.Subtitle))
+        {
+            <p class="list-card__subtitle">@Model.Subtitle</p>
+        }
+        @if (!string.IsNullOrEmpty(Model.Meta))
+        {
+            <p class="list-card__meta">@Model.Meta</p>
+        }
+        @if (!string.IsNullOrEmpty(Model.Highlight))
+        {
+            <p class="list-card__highlight">@Model.Highlight</p>
+        }
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.ButtonText) || !string.IsNullOrEmpty(Model.DangerButtonText))
+    {
+        <div class="list-card__actions">
+            @if (!string.IsNullOrEmpty(Model.ButtonText))
+            {
+                if (!string.IsNullOrEmpty(Model.ButtonAction))
+                {
+                    <a class="btn btn--gold btn--sm" asp-controller="@controllerName" asp-action="@Model.ButtonAction">@Model.ButtonText</a>
+                }
+                else
+                {
+                    @* No destination yet (front-end only). *@
+                    <button type="button" class="btn btn--gold btn--sm">@Model.ButtonText</button>
+                }
+            }
+
+            @if (!string.IsNullOrEmpty(Model.DangerButtonText))
+            {
+                <button type="button" class="btn btn--danger btn--sm">@Model.DangerButtonText</button>
+            }
+        </div>
+    }
+</article>

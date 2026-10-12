@@ -1,0 +1,31 @@
+@{
+    ViewData["Title"] = "Create a Student Account";
+}
+
+<section class="auth-card">
+    <header class="auth-card__header">
+        <span class="auth-card__icon">@Html.Icon("user-plus")</span>
+        <h1 class="auth-card__title">Create an Account</h1>
+    </header>
+
+    @* Front-end only: the form does not save anything yet. *@
+    <form class="auth-form" method="post" asp-controller="Account" asp-action="SignUpStudent">
+        <partial name="_FormField" model='new FormFieldViewModel("studentNumber", "Student Number", "id-card")' />
+        <partial name="_FormField" model='new FormFieldViewModel("fullName", "Name (LN, FN, MI)", "user", Autocomplete: "name")' />
+        <partial name="_FormField" model='new FormFieldViewModel("email", "Email", "mail", "email", "email")' />
+        <partial name="_FormField" model='new FormFieldViewModel("password", "Password", "lock", "password", "new-password")' />
+        <partial name="_FormField" model='new FormFieldViewModel("confirmPassword", "Confirm Password", "lock", "password", "new-password")' />
+
+        <button type="submit" class="btn btn--gold btn--block">
+            @Html.Icon("user-plus")
+            <span>Create Account</span>
+        </button>
+    </form>
+
+    <div class="divider"><span>or</span></div>
+
+    <p class="auth-card__switch">
+        Already have an account?
+        <a asp-controller="Account" asp-action="SignIn">Sign In</a>
+    </p>
+</section>

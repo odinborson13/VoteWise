@@ -1,0 +1,17 @@
+@model BallotViewModel
+
+<section class="page-body">
+
+    <a class="back-link" asp-action="Elections">
+        @Html.Icon("arrow-left")
+        <span>Back to Elections</span>
+    </a>
+
+    <partial name="_BallotPreview" model="Model" />
+
+    <div class="center-actions">
+        @* Front-end only: nothing is saved yet. *@
+        <a class="btn btn--gold btn--lg" asp-action="Elections">Save Ballot</a>
+    </div>
+
+</section>

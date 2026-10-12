@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | VoteWise</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    @* site.css supplies the shared design tokens, base styles and buttons.
+       dashboard.css adds everything specific to the signed-in screens. *@
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+</head>
+<body class="page-dashboard">
+
+    <div class="app-shell">
+
+        <partial name="_Sidebar" />
+
+        <div class="app-main">
+            <partial name="_Topbar" />
+
+            <main class="app-content" id="main-content">
+                @RenderBody()
+            </main>
+        </div>
+
+    </div>
+
+</body>
+</html>

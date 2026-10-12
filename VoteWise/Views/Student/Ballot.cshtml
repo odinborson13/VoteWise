@@ -1,0 +1,31 @@
+@model BallotViewModel
+@{
+    ViewData["Title"] = "Official Ballot";
+    ViewData["ActiveNav"] = "Elections";
+}
+
+<section class="page-body">
+
+    <a class="back-link" asp-action="Elections">
+        @Html.Icon("arrow-left")
+        <span>Back to Elections</span>
+    </a>
+
+    @* Front-end only: the form does not record a vote. *@
+    <form method="post" asp-action="ConfirmVote">
+
+        <partial name="_BallotPreview" model="Model" />
+
+        <div class="ballot-actions">
+            <a class="btn btn--gold" asp-action="Elections">
+                @Html.Icon("chevron-left")
+                <span>Previous</span>
+            </a>
+            <button type="submit" class="btn btn--gold">
+                <span>Next</span>
+                @Html.Icon("chevron-right")
+            </button>
+        </div>
+    </form>
+
+</section>

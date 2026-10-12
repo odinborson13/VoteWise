@@ -1,0 +1,46 @@
+@model BallotViewModel
+@{
+    var progressPercent = Model.PositionNumber * 100 / Model.TotalPositions;
+    var selectLabel = $"Select {Model.SlotsToSelect} candidate{(Model.SlotsToSelect == 1 ? "" : "s")}";
+}
+
+@* The official ballot for one position: heading, progress, candidate list and confidentiality note.
+   Used by the student ballot and by the organization's ballot review. *@
+
+<header class="ballot-head">
+    <h1 class="ballot-head__title">Official Ballot</h1>
+    <p class="ballot-head__election">@Model.ElectionName</p>
+    <p class="ballot-head__help">
+        Please select the number of candidates indicated for each position.
+        You may leave a position blank if you do not wish to vote for any candidate.
+    </p>
+
+    <div class="progress">
+        <p class="progress__label">@Model.PositionNumber of @Model.TotalPositions Positions</p>
+        <div class="progress__track" role="progressbar" aria-valuemin="0" aria-valuemax="@Model.TotalPositions" aria-valuenow="@Model.PositionNumber">
+            <div class="progress__bar" style="width: @(progressPercent)%"></div>
+        </div>
+    </div>
+</header>
+
+<div class="ballot-card" role="group" aria-labelledby="position-heading">
+    <div class="ballot-card__header">
+        <h2 class="ballot-card__position" id="position-heading">
+            @Html.Icon("user")
+            <span>@Model.PositionTitle</span>
+        </h2>
+        <span class="ballot-card__rule">@selectLabel</span>
+    </div>
+
+    <div class="ballot-card__body">
+        @foreach (var candidate in Model.Candidates)
+        {
+            <partial name="_CandidateOption" model="new CandidateOptionViewModel(Model.PositionKey, candidate)" />
+        }
+    </div>
+</div>
+
+<p class="ballot-note">
+    @Html.Icon("info")
+    <span>This ballot is confidential. Your vote will be kept anonymous and secure.</span>
+</p>

@@ -1,0 +1,56 @@
+@{
+    // Each view sets ViewData["ActiveNav"] to highlight its sidebar item.
+    // The folder's _ViewStart sets ViewData["NavController"] ("Student", "Organization" or "Admin").
+    var active = ViewData["ActiveNav"] as string;
+    var navController = ViewData["NavController"] as string ?? "Student";
+
+    var studentItems = new[]
+    {
+        (Key: "Elections",     Text: "Elections",     Icon: "vote",           Action: "Elections"),
+        (Key: "Organizations", Text: "Organizations", Icon: "users",          Action: "Organizations"),
+        (Key: "Candidacies",   Text: "Candidacies",   Icon: "clipboard-list", Action: "Candidacies"),
+        (Key: "Settings",      Text: "Settings",      Icon: "settings",       Action: "Settings")
+    };
+
+    var organizationItems = new[]
+    {
+        (Key: "Elections", Text: "Elections", Icon: "vote",     Action: "Elections"),
+        (Key: "Members",   Text: "Members",   Icon: "users",    Action: "Members"),
+        (Key: "Settings",  Text: "Settings",  Icon: "settings", Action: "Settings")
+    };
+
+    var adminItems = new[]
+    {
+        (Key: "Elections",     Text: "Elections",     Icon: "vote",     Action: "Elections"),
+        (Key: "Organizations", Text: "Organizations", Icon: "users",    Action: "Organizations"),
+        (Key: "Settings",      Text: "Settings",      Icon: "settings", Action: "Settings")
+    };
+
+    var items = navController switch
+    {
+        "Organization" => organizationItems,
+        "Admin"        => adminItems,
+        _              => studentItems
+    };
+}
+
+<aside class="sidebar">
+    <a class="sidebar__brand" asp-controller="@navController" asp-action="Elections" aria-label="VoteWise dashboard">
+        <img src="~/images/qcu-seal.png" alt="" width="40" height="40" />
+        <span>VoteWise</span>
+    </a>
+
+    <nav class="sidebar__nav" aria-label="Dashboard">
+        @foreach (var item in items)
+        {
+            var isActive = item.Key == active;
+            <a class="sidebar__link @(isActive ? "is-active" : "")"
+               asp-controller="@navController"
+               asp-action="@item.Action"
+               aria-current="@(isActive ? "page" : null)">
+                @Html.Icon(item.Icon)
+                <span>@item.Text</span>
+            </a>
+        }
+    </nav>
+</aside>

@@ -1,0 +1,34 @@
+@model IReadOnlyList<ListCardViewModel>
+@{
+    ViewData["Title"] = "Join an Organization";
+    ViewData["ActiveNav"] = "Organizations";
+}
+
+<header class="page-head">
+    <h1 class="page-head__title">Explore Organizations</h1>
+    <p class="page-head__text">Find your community. Participate in your organization's elections.</p>
+</header>
+
+<partial name="_Tabs" model='new[] {
+    new TabItem("My Organizations", "Organizations"),
+    new TabItem("Join an Organization", "JoinOrganization", true),
+    new TabItem("Invitations", "Invitations") }' />
+
+<section class="page-body">
+
+    @* Front-end only: searching is not wired up. *@
+    <div class="search-field">
+        @Html.Icon("search")
+        <label class="visually-hidden" for="organizationSearch">Search an organization by name</label>
+        <input class="search-field__input" id="organizationSearch" type="search" placeholder="Search an organization by name" autocomplete="off" />
+    </div>
+
+    <h2 class="list-heading">All Organizations</h2>
+
+    <div class="card-stack">
+        @foreach (var organization in Model)
+        {
+            <partial name="_ListCard" model="organization" />
+        }
+    </div>
+</section>

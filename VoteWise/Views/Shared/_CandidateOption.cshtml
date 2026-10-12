@@ -1,0 +1,20 @@
+@model CandidateOptionViewModel
+@{
+    var candidate = Model.Candidate;
+}
+
+@* One selectable candidate on the ballot. The whole card is the label, so it is easy to tap. *@
+<label class="candidate">
+    <input class="candidate__radio" type="radio" name="@Model.GroupName" value="@candidate.Value" />
+
+    <span class="candidate__check" aria-hidden="true"></span>
+
+    <span class="candidate__avatar" aria-hidden="true">@Html.Icon("user")</span>
+
+    <span class="candidate__info">
+        <span class="candidate__name">@candidate.Name</span>
+        <span class="candidate__party">@candidate.Party</span>
+    </span>
+
+    <span class="candidate__platform">@candidate.Platform</span>
+</label>

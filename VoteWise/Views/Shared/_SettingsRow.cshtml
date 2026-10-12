@@ -1,0 +1,23 @@
+@model SettingsRowViewModel
+
+@* Label on the left, input on the right. Optional icon button sits inside the input. *@
+<div class="settings-row">
+    <label class="settings-row__label" for="@Model.Id">@Model.Label</label>
+
+    <div class="settings-row__control">
+        <input class="settings-row__input"
+               id="@Model.Id"
+               name="@Model.Id"
+               type="@Model.Type"
+               autocomplete="@Model.Autocomplete"
+               placeholder="@Model.Placeholder" />
+
+        @if (!string.IsNullOrEmpty(Model.TrailingIcon))
+        {
+            @* Decorative for now: edit / show-password behaviour is not wired up. *@
+            <button type="button" class="settings-row__action" aria-label="@(Model.TrailingIcon == "eye" ? "Show password" : "Edit " + Model.Label)">
+                @Html.Icon(Model.TrailingIcon)
+            </button>
+        }
+    </div>
+</div>

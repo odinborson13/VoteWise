@@ -1,0 +1,30 @@
+@model IReadOnlyList<ListCardViewModel>
+@{
+    ViewData["Title"] = "Members";
+    ViewData["ActiveNav"] = "Members";
+}
+
+<header class="page-head">
+    <h1 class="page-head__title">Members</h1>
+    <p class="page-head__text">Manage members of your organization.</p>
+</header>
+
+<partial name="_Tabs" model='new[] {
+    new TabItem("Join Requests", "Members", true),
+    new TabItem("Pending Invitations", "PendingInvitations") }' />
+
+<section class="page-body">
+
+    <a class="btn btn--gold btn--wide" asp-action="InviteStudent">
+        @Html.Icon("plus")
+        <span>Invite a Student</span>
+    </a>
+
+    <div class="card-stack card-stack--spaced">
+        @foreach (var request in Model)
+        {
+            <partial name="_ListCard" model="request" />
+        }
+    </div>
+
+</section>

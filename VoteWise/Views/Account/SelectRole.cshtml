@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = "Select Your Role";
+}
+
+<section class="auth-panel auth-panel--wide">
+    <h1 class="auth-panel__title">Select Your Role</h1>
+    <p class="auth-panel__subtitle">Choose how you will be using VoteWise.</p>
+
+    <div class="role-grid">
+
+        <a class="role-card" asp-controller="Account" asp-action="SignUpStudent">
+            <span class="role-card__icon">@Html.Icon("graduation-cap")</span>
+            <span class="role-card__label">Student</span>
+            <span class="role-card__hint">Vote and run for positions</span>
+        </a>
+
+        <a class="role-card" asp-controller="Account" asp-action="SignUpOrganization">
+            <span class="role-card__icon">@Html.Icon("users")</span>
+            <span class="role-card__label">Organization</span>
+            <span class="role-card__hint">Create and manage elections</span>
+        </a>
+
+    </div>
+</section>

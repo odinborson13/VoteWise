@@ -1,0 +1,26 @@
+@model ElectionResultsViewModel
+@{
+    ViewData["Title"] = "Election Results";
+    ViewData["ActiveNav"] = "Elections";
+}
+
+<section class="page-body">
+
+    <a class="back-link" asp-action="Results">
+        @Html.Icon("arrow-left")
+        <span>Back to Elections</span>
+    </a>
+
+    <header class="detail-head">
+        <h1 class="detail-head__title">@Model.ElectionName</h1>
+        <p class="detail-head__text">Result for the @Model.ElectionName</p>
+    </header>
+
+    <div class="result-grid">
+        @foreach (var position in Model.Positions)
+        {
+            <partial name="_PositionResult" model="position" />
+        }
+    </div>
+
+</section>

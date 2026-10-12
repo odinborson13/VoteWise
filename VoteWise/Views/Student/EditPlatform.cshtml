@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Edit Candidate Platform";
+    ViewData["ActiveNav"] = "Candidacies";
+}
+
+<section class="page-body">
+
+    <a class="back-link" asp-action="AcceptedCandidacies">
+        @Html.Icon("arrow-left")
+        <span>Back to Candidacies</span>
+    </a>
+
+    <header class="detail-head">
+        <h1 class="detail-head__title">Edit Candidate Platforms</h1>
+        <p class="detail-head__text">League of Excellent Students in Information Technology - Vice President for Internal Affairs</p>
+    </header>
+
+    @* Front-end only: the form does not save anything yet. *@
+    <form class="platform-form" method="post" asp-action="EditPlatform">
+        <label class="platform-form__label" for="platform">Enter Platform Description</label>
+        <textarea class="platform-form__textarea"
+                  id="platform"
+                  name="platform"
+                  rows="12"
+                  placeholder="Describe what you stand for and what you plan to do if elected."></textarea>
+
+        <div class="form-actions">
+            <a class="btn btn--outline" asp-action="AcceptedCandidacies">Cancel</a>
+            <button type="submit" class="btn btn--gold">Save Platforms</button>
+        </div>
+    </form>
+
+</section>

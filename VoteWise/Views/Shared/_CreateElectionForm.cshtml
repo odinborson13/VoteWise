@@ -1,0 +1,66 @@
+@model bool
+@* Model = true shows the Organization Name field (administrator). *@
+
+<section class="page-body">
+
+    <a class="back-link" asp-action="Elections">
+        @Html.Icon("arrow-left")
+        <span>Back to Elections</span>
+    </a>
+
+    <header class="detail-head">
+        <h1 class="detail-head__title">Create an Election</h1>
+        <p class="detail-head__text">Set up a new election by providing the election details.</p>
+    </header>
+
+    @* Front-end only: nothing is saved. "Next" simply moves to the candidates step. *@
+    <form class="election-form" method="get" asp-action="AddCandidates">
+
+        <div class="field-block">
+            <label class="field-block__label" for="electionName">Election Name</label>
+            <input class="field-block__input" id="electionName" name="electionName" type="text" autocomplete="off" />
+        </div>
+
+        @if (Model)
+        {
+            @* Only the system administrator picks which organization the election belongs to. *@
+            <div class="field-block">
+                <label class="field-block__label" for="organizationName">Organization Name</label>
+                <input class="field-block__input" id="organizationName" name="organizationName" type="text" autocomplete="off" />
+            </div>
+        }
+
+        <div class="field-block">
+            <label class="field-block__label" for="pollingPlace">Polling Place</label>
+            <input class="field-block__input" id="pollingPlace" name="pollingPlace" type="text" autocomplete="off" />
+        </div>
+
+        <section class="positions-card" aria-labelledby="positions-heading">
+            <h2 class="field-block__label" id="positions-heading">Positions</h2>
+
+            <div class="positions-card__box">
+                <div class="positions-row">
+                    <div class="field-block field-block--compact">
+                        <label class="field-block__sublabel" for="positionTitle">Position Title</label>
+                        <input class="field-block__input field-block__input--plain" id="positionTitle" name="positionTitle" type="text" autocomplete="off" />
+                    </div>
+
+                    <div class="field-block field-block--compact">
+                        <label class="field-block__sublabel" for="positionSlots">Number of Slots</label>
+                        <input class="field-block__input field-block__input--plain" id="positionSlots" name="positionSlots" type="number" min="1" inputmode="numeric" />
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn--gold btn--sm">
+                    @Html.Icon("plus")
+                    <span>Add Position</span>
+                </button>
+            </div>
+        </section>
+
+        <div class="center-actions">
+            <button type="submit" class="btn btn--gold btn--lg">Next</button>
+        </div>
+    </form>
+
+</section>

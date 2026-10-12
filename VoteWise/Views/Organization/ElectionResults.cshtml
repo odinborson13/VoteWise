@@ -1,0 +1,8 @@
+@model ElectionResultsViewModel
+@{
+    ViewData["Title"] = "Election Results";
+    ViewData["ActiveNav"] = "Elections";
+}
+
+@* The page content is shared with the administrator dashboard. *@
+<partial name="_ElectionResultsPage" model="Model" />

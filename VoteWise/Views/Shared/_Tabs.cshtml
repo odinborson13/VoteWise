@@ -1,0 +1,12 @@
+@model IEnumerable<TabItem>
+
+@* Tab strip under a page header. Each tab links to an action on the current dashboard's controller. *@
+<nav class="tabs" aria-label="Sections">
+    @foreach (var tab in Model)
+    {
+        <a class="tabs__link @(tab.IsActive ? "is-active" : "")"
+           asp-controller="@(ViewData["NavController"] as string ?? "Student")"
+           asp-action="@tab.Action"
+           aria-current="@(tab.IsActive ? "page" : null)">@tab.Text</a>
+    }
+</nav>

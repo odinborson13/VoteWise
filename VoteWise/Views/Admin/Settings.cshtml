@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Settings";
+    ViewData["ActiveNav"] = "Settings";
+}
+
+<header class="page-head">
+    <h1 class="page-head__title">Settings</h1>
+    <p class="page-head__text">Manage your account.</p>
+</header>
+
+@* The administrator has no editable profile, only password and log out. *@
+<section class="page-body settings">
+    <partial name="_PasswordAndLogout" />
+</section>

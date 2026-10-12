@@ -1,0 +1,25 @@
+@* Floating pill navigation bar shown on every public page. *@
+<header class="site-header">
+    <div class="navbar">
+
+        <a class="brand" asp-controller="Home" asp-action="Index" aria-label="VoteWise home">
+            <img class="brand__seal" src="~/images/qcu-seal.png" alt="Quezon City University seal" width="48" height="48" />
+            <span class="brand__text">
+                <span class="brand__name">VoteWise</span>
+                <span class="brand__tagline">Smart Elections. Trusted Results.</span>
+            </span>
+        </a>
+
+        <nav class="navbar__links" aria-label="Primary">
+            <a class="navbar__link" asp-controller="Home" asp-action="Index">Home</a>
+            <a class="navbar__link" asp-controller="Home" asp-action="Index" asp-fragment="how-it-works">How It Works</a>
+            <a class="navbar__link" asp-controller="Home" asp-action="Index" asp-fragment="about">About</a>
+        </nav>
+
+        <a class="btn btn--outline btn--sm" asp-controller="Account" asp-action="SelectRole">
+            @Html.Icon("log-in")
+            <span>Login to Vote</span>
+        </a>
+
+    </div>
+</header>

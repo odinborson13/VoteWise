@@ -1,0 +1,26 @@
+@model IReadOnlyList<ListCardViewModel>
+@{
+    ViewData["Title"] = "Elections";
+    ViewData["ActiveNav"] = "Elections";
+}
+
+<header class="page-head">
+    <h1 class="page-head__title">Elections</h1>
+    <p class="page-head__text">View, create and close polls.</p>
+</header>
+
+<section class="page-body">
+
+    <a class="btn btn--gold btn--wide" asp-action="CreateElection">
+        @Html.Icon("plus")
+        <span>Create an Election</span>
+    </a>
+
+    <div class="card-stack card-stack--spaced">
+        @foreach (var election in Model)
+        {
+            <partial name="_ListCard" model="election" />
+        }
+    </div>
+
+</section>

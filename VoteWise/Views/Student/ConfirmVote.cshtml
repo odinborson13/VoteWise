@@ -1,0 +1,46 @@
+@model ConfirmVoteViewModel
+@{
+    ViewData["Title"] = "Confirm Your Vote";
+    ViewData["ActiveNav"] = "Elections";
+}
+
+<section class="page-body">
+
+    <a class="back-link" asp-action="Ballot">
+        @Html.Icon("arrow-left")
+        <span>Back to Ballot</span>
+    </a>
+
+    <header class="detail-head">
+        <h1 class="detail-head__title">Confirm Your Vote</h1>
+        <p class="detail-head__text">
+            Please review your selections below.<br />
+            Once you submit, your vote will be final and cannot be changed.
+        </p>
+    </header>
+
+    <section class="summary-card" aria-labelledby="selections-heading">
+        <h2 class="summary-card__title" id="selections-heading">Your Selections</h2>
+
+        <ul class="summary-list">
+            @foreach (var selection in Model.Selections)
+            {
+                <li class="summary-row">
+                    <span class="summary-row__position">@selection.Position</span>
+                    <span class="summary-row__candidate">
+                        <span class="candidate__avatar candidate__avatar--sm" aria-hidden="true">@Html.Icon("user")</span>
+                        <span class="candidate__info">
+                            <span class="candidate__name">@selection.CandidateName</span>
+                            <span class="candidate__party">@selection.Party</span>
+                        </span>
+                    </span>
+                </li>
+            }
+        </ul>
+    </section>
+
+    <div class="center-actions">
+        <a class="btn btn--gold btn--lg" asp-action="Elections">Cast Your Ballot</a>
+    </div>
+
+</section>

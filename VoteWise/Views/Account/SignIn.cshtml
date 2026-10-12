@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+<section class="auth-card auth-card--narrow">
+    <header class="auth-card__header">
+        <span class="auth-card__icon">@Html.Icon("user")</span>
+        <h1 class="auth-card__title">Sign In</h1>
+    </header>
+
+    @* Front-end only: the form does not authenticate anyone yet. *@
+    <form class="auth-form" method="post" asp-controller="Account" asp-action="SignIn">
+        <partial name="_FormField" model='new FormFieldViewModel("idNumber", "ID Number", "id-card", Autocomplete: "username")' />
+        <partial name="_FormField" model='new FormFieldViewModel("password", "Password", "lock", "password", "current-password")' />
+
+        <button type="submit" class="btn btn--gold btn--block">
+            @Html.Icon("log-in")
+            <span>Sign In</span>
+        </button>
+    </form>
+
+    <div class="divider"><span>or</span></div>
+
+    <p class="auth-card__switch">
+        Don’t have an account?
+        <a asp-controller="Account" asp-action="SelectRole">Sign Up</a>
+    </p>
+</section>

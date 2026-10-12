@@ -1,0 +1,33 @@
+@* Site footer. Rendered only on the landing page. *@
+<footer class="site-footer" id="about">
+    <div class="site-footer__inner">
+
+        <div class="site-footer__brand">
+            <div class="brand brand--footer">
+                <img class="brand__seal" src="~/images/qcu-seal.png" alt="Quezon City University seal" width="44" height="44" />
+                <span class="brand__text">
+                    <span class="brand__name">VoteWise</span>
+                    <span class="brand__tagline brand__tagline--muted">Smart Elections. Trusted Results.</span>
+                </span>
+            </div>
+            <p class="site-footer__blurb">
+                An online voting platform designed to make democratic participation accessible to QCians.
+            </p>
+        </div>
+
+        <nav class="site-footer__nav" aria-label="Quick links">
+            <h2 class="site-footer__heading">Quick Links</h2>
+            <ul>
+                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-controller="Home" asp-action="Index" asp-fragment="features">Features</a></li>
+                <li><a asp-controller="Home" asp-action="Index" asp-fragment="polling-places">Polling Place</a></li>
+            </ul>
+        </nav>
+
+        <div class="site-footer__legal">
+            <p>&copy; 2026 VoteWise</p>
+            <p>Student Election Management System</p>
+        </div>
+
+    </div>
+</footer>

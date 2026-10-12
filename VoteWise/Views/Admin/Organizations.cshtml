@@ -1,0 +1,23 @@
+@model IReadOnlyList<ListCardViewModel>
+@{
+    ViewData["Title"] = "All Organizations";
+    ViewData["ActiveNav"] = "Organizations";
+}
+
+<header class="page-head">
+    <h1 class="page-head__title">Organizations</h1>
+    <p class="page-head__text">Manage the organizations registered in VoteWise.</p>
+</header>
+
+<partial name="_Tabs" model='new[] {
+    new TabItem("All Organizations", "Organizations", true),
+    new TabItem("Pending Approvals", "PendingApprovals") }' />
+
+<section class="page-body">
+    <div class="card-stack">
+        @foreach (var organization in Model)
+        {
+            <partial name="_ListCard" model="organization" />
+        }
+    </div>
+</section>

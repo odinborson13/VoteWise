@@ -1,0 +1,31 @@
+@model ElectionResultsViewModel
+
+<section class="page-body">
+
+    <a class="back-link" asp-action="Elections">
+        @Html.Icon("arrow-left")
+        <span>Back to Elections</span>
+    </a>
+
+    <header class="detail-head">
+        <h1 class="detail-head__title">@Model.ElectionName</h1>
+        <p class="detail-head__text">Result for the @Model.ElectionName</p>
+    </header>
+
+    <div class="result-grid">
+        @foreach (var position in Model.Positions)
+        {
+            <partial name="_PositionResult" model="position" />
+        }
+    </div>
+
+    <section class="settings-section settings-section--spaced">
+        <h2 class="settings-section__title">Close Poll</h2>
+        <div class="settings-card settings-card--inline">
+            <p>Are you sure you want to close this poll? This cannot be undone.</p>
+            @* Front-end only: closing the poll is not wired up. *@
+            <button type="button" class="btn btn--danger btn--sm">Close Poll</button>
+        </div>
+    </section>
+
+</section>

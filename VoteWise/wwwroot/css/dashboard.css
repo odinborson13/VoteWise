@@ -1,0 +1,1096 @@
+/* ==========================================================================
+   VoteWise - dashboard styles (signed-in student screens)
+
+   Loaded AFTER site.css, which provides the design tokens (colors, radii,
+   shadows), base styles and the .btn component. This file only adds what
+   the dashboard needs.
+
+   Sections:
+     1. Shell (sidebar, top bar, content area)
+     2. Page header & tabs
+     3. Shared components (list cards, back link, search, utilities)
+     4. Ballot & candidates
+     5. Confirm vote
+     6. Results
+     7. Edit platform
+     8. Settings
+     9. Organization screens
+    10. Responsive adjustments
+   ========================================================================== */
+
+
+/* 1. Shell
+   -------------------------------------------------------------------------- */
+.page-dashboard {
+    background: var(--sky-100);
+}
+
+.app-shell {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    min-height: 100vh;
+}
+
+.app-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.app-content {
+    flex: 1;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    padding: 1.5rem 1rem;
+    color: var(--white);
+    background: linear-gradient(180deg, var(--navy-950) 0%, var(--navy-900) 55%, var(--navy-700) 100%);
+}
+
+.sidebar__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 0.75rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.sidebar__brand img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.sidebar__nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: 2.25rem;
+}
+
+.sidebar__link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--white);
+    border-radius: var(--radius-pill);
+    transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.sidebar__link:hover {
+    background: rgb(255 255 255 / 12%);
+}
+
+.sidebar__link.is-active {
+    color: var(--navy-900);
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+}
+
+/* --- Top bar --- */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.75rem 2rem;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+}
+
+.topbar__user {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.avatar {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    color: var(--navy-900);
+    background: var(--gold-500);
+    border-radius: 50%;
+}
+
+.topbar__identity {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.topbar__name {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--navy-900);
+}
+
+.topbar__id {
+    font-size: 0.82rem;
+    color: var(--muted);
+}
+
+
+/* 2. Page header & tabs
+   -------------------------------------------------------------------------- */
+.page-head {
+    padding: 1.75rem 2rem 1.25rem;
+}
+
+.page-head__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.page-head__text {
+    margin-top: 0.15rem;
+    color: var(--muted);
+}
+
+.tabs {
+    display: flex;
+    gap: 2.25rem;
+    padding-inline: 2rem;
+    overflow-x: auto;
+    background: var(--white);
+    border-block: 1px solid var(--line);
+}
+
+.tabs__link {
+    padding: 0.9rem 0 0.8rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--muted);
+    border-bottom: 3px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.tabs__link:hover {
+    color: var(--navy-900);
+}
+
+.tabs__link.is-active {
+    color: var(--blue-600);
+    border-bottom-color: var(--blue-600);
+}
+
+.page-body {
+    padding: 2rem;
+}
+
+
+/* 3. Shared components
+   -------------------------------------------------------------------------- */
+.card-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* --- List card (elections, organizations, invitations, candidacies) --- */
+.list-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: 1.15rem 1.75rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.list-card:hover {
+    border-color: var(--navy-900);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.list-card__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.list-card__subtitle,
+.list-card__meta {
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+.list-card__highlight {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink);
+}
+
+/* --- Back link --- */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy-900);
+    transition: color 0.15s ease, gap 0.15s ease;
+}
+
+.back-link:hover {
+    gap: 0.75rem;
+    color: var(--blue-600);
+}
+
+/* --- Detail page header (confirm vote, results, edit platform) --- */
+.detail-head {
+    margin-bottom: 1.5rem;
+}
+
+.detail-head__title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.detail-head__text {
+    margin-top: 0.35rem;
+    color: var(--muted);
+}
+
+/* --- Search field --- */
+.search-field {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+    padding: 0.7rem 1.25rem;
+    color: var(--muted);
+    background: var(--white);
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius-pill);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.search-field:focus-within {
+    border-color: var(--blue-600);
+    box-shadow: 0 0 0 4px rgb(11 77 174 / 15%);
+}
+
+.search-field__input {
+    flex: 1;
+    min-width: 0;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+}
+
+.search-field__input:focus {
+    outline: none;
+}
+
+.list-heading {
+    margin-bottom: 0.85rem;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+/* --- Danger button (log out) --- */
+.btn--danger {
+    color: var(--white);
+    background: #dc2626;
+    box-shadow: 0 6px 16px rgb(220 38 38 / 28%);
+}
+
+.btn--danger:hover {
+    background: #b91c1c;
+}
+
+/* --- Utilities --- */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+.center-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+
+/* 4. Ballot & candidates
+   -------------------------------------------------------------------------- */
+.ballot-head {
+    margin-bottom: 1.5rem;
+}
+
+.ballot-head__title,
+.ballot-head__election {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.ballot-head__help {
+    margin-top: 0.85rem;
+    max-width: 70ch;
+    color: var(--muted);
+}
+
+.progress {
+    margin-top: 1.25rem;
+}
+
+.progress__label {
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.progress__track {
+    height: 8px;
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+}
+
+.progress__bar {
+    height: 100%;
+    background: var(--blue-600);
+    border-radius: var(--radius-pill);
+}
+
+.ballot-card {
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.ballot-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.85rem 1.5rem;
+    color: var(--white);
+    background: linear-gradient(90deg, var(--navy-950), var(--navy-700));
+}
+
+.ballot-card__position {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.ballot-card__rule {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.ballot-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.1rem;
+}
+
+/* --- Candidate option (radio card) --- */
+.candidate {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.5rem 3.5rem minmax(0, 1fr) minmax(0, 1.2fr);
+    align-items: center;
+    gap: 1rem;
+    padding: 0.9rem 1.5rem 0.9rem 1.25rem;
+    background: var(--white);
+    border: 1.5px solid #c5cfe6;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.candidate:hover {
+    border-color: var(--navy-900);
+    background: var(--sky-50);
+}
+
+/* The real radio is hidden; .candidate__check draws the visible circle. */
+.candidate__radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.candidate__check {
+    width: 1.4rem;
+    height: 1.4rem;
+    background: var(--white);
+    border: 2px solid #8a93ad;
+    border-radius: 50%;
+    transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.candidate__radio:checked + .candidate__check {
+    background: var(--blue-600);
+    border-color: var(--blue-600);
+    box-shadow: inset 0 0 0 3.5px var(--white);
+}
+
+.candidate__radio:focus-visible + .candidate__check {
+    outline: 3px solid var(--gold-500);
+    outline-offset: 3px;
+}
+
+.candidate:has(.candidate__radio:checked) {
+    background: var(--sky-50);
+    border-color: var(--blue-600);
+    box-shadow: 0 0 0 3px rgb(11 77 174 / 15%);
+}
+
+.candidate__avatar {
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    color: var(--navy-900);
+    background: var(--white);
+    border: 2px solid var(--navy-900);
+    border-radius: 50%;
+}
+
+.candidate__avatar .icon {
+    width: 1.75rem;
+    height: 1.75rem;
+}
+
+.candidate__avatar--sm {
+    width: 3rem;
+    height: 3rem;
+    flex-shrink: 0;
+}
+
+.candidate__info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.3;
+}
+
+.candidate__name {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.candidate__party {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.candidate__platform {
+    align-self: stretch;
+    display: grid;
+    place-items: center;
+    padding-left: 1.25rem;
+    font-size: 0.92rem;
+    text-align: center;
+    color: var(--muted);
+    border-left: 2px solid var(--line);
+}
+
+.ballot-note {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--muted);
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+}
+
+.ballot-note .icon {
+    color: var(--navy-900);
+}
+
+.ballot-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+
+/* 5. Confirm vote
+   -------------------------------------------------------------------------- */
+.summary-card {
+    padding: 1.5rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.summary-card__title {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.summary-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.summary-row {
+    display: grid;
+    grid-template-columns: minmax(120px, 220px) minmax(0, 1fr);
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+}
+
+.summary-row__position {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.summary-row__candidate {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--line);
+}
+
+
+/* 6. Results
+   -------------------------------------------------------------------------- */
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.result-card {
+    padding: 1.5rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.result-card__title {
+    padding-bottom: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    border-bottom: 2px solid var(--line);
+}
+
+.result-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.result-row {
+    display: grid;
+    grid-template-columns: 2rem minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0.75rem;
+    border-radius: var(--radius-sm);
+}
+
+.result-row + .result-row {
+    border-top: 1px solid var(--line);
+}
+
+.result-row.is-leading {
+    background: var(--sky-50);
+}
+
+.result-row__rank {
+    font-size: 1.6rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.result-row.is-leading .result-row__rank {
+    color: var(--gold-600);
+}
+
+.result-row__candidate {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+}
+
+.result-row__name {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.result-row__party {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.result-row__votes {
+    font-size: 1.15rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* 7. Edit platform
+   -------------------------------------------------------------------------- */
+.platform-form {
+    max-width: 960px;
+}
+
+.platform-form__label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.platform-form__textarea {
+    display: block;
+    width: 100%;
+    min-height: 320px;
+    padding: 1.25rem 1.5rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--ink);
+    resize: vertical;
+    background: var(--white);
+    border: 1.5px solid #c5cfe6;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.platform-form__textarea:focus {
+    outline: none;
+    border-color: var(--blue-600);
+    box-shadow: 0 0 0 4px rgb(11 77 174 / 15%), var(--shadow-md);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+}
+
+
+/* 8. Settings
+   -------------------------------------------------------------------------- */
+.settings {
+    max-width: 960px;
+    padding-top: 0.5rem;
+}
+
+.settings-section + .settings-section {
+    margin-top: 2rem;
+}
+
+.settings-section__title {
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.settings-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.settings-card--inline {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1rem;
+}
+
+.settings-card__actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.25rem;
+}
+
+.settings-row {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    align-items: center;
+    gap: 1rem;
+}
+
+.settings-row__label {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.settings-row__control {
+    position: relative;
+}
+
+.settings-row__input {
+    width: 100%;
+    padding: 0.7rem 3rem 0.7rem 1.15rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--sky-100);
+    border: 1.5px solid var(--navy-900);
+    border-radius: var(--radius-pill);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.settings-row__input:focus {
+    outline: none;
+    background: var(--white);
+    border-color: var(--blue-600);
+    box-shadow: 0 0 0 4px rgb(11 77 174 / 15%);
+}
+
+.settings-row__action {
+    position: absolute;
+    top: 50%;
+    right: 0.55rem;
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    color: var(--navy-900);
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: background-color 0.15s ease;
+}
+
+.settings-row__action:hover {
+    background: rgb(10 10 92 / 10%);
+}
+
+
+/* 9. Organization screens (elections setup, members, close poll)
+   -------------------------------------------------------------------------- */
+
+/* Buttons grouped on the right of a list card (e.g. Accept + Remove). */
+.list-card__actions {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.card-stack--spaced {
+    margin-top: 1.5rem;
+}
+
+/* Full-width call-to-action ("Create an Election", "Invite a Student"). */
+.btn--wide {
+    display: flex;
+    width: 100%;
+    padding-block: 0.8rem;
+}
+
+/* --- Form fields with a bold label above a pill input --- */
+.election-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 960px;
+}
+
+.field-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.field-block__label {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.field-block__sublabel {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.field-block__input {
+    width: 100%;
+    padding: 0.8rem 1.35rem;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--white);
+    border: 1.5px solid #c5cfe6;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Smaller, flat variant used inside cards. */
+.field-block__input--plain {
+    padding-block: 0.6rem;
+    box-shadow: none;
+}
+
+.field-block__input:focus {
+    outline: none;
+    border-color: var(--blue-600);
+    box-shadow: 0 0 0 4px rgb(11 77 174 / 15%);
+}
+
+/* --- Positions card (create election) --- */
+.positions-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.positions-card__box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem 1.5rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.positions-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 180px;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* --- Candidate entry (add candidates) --- */
+.candidate-section {
+    margin-bottom: 1.75rem;
+}
+
+.candidate-section__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.65rem;
+}
+
+.candidate-section__title {
+    font-size: 1.35rem;
+    font-weight: 700;
+}
+
+.candidate-form {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: 1.1rem 1.5rem 1.35rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+/* --- Invite student card --- */
+.invite-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    width: min(620px, 100%);
+    margin: 1rem auto 0;
+    padding: 2rem 2.5rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.invite-card__label {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* --- Extra spacing for the Close Poll block under the results --- */
+.settings-section--spaced {
+    margin-top: 2.5rem;
+}
+
+
+/* 10. Responsive adjustments
+   -------------------------------------------------------------------------- */
+@media (max-width: 960px) {
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 860px) {
+    /* Sidebar becomes a compact strip across the top. */
+    .app-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .sidebar__nav {
+        flex-direction: row;
+        margin-top: 0;
+        overflow-x: auto;
+    }
+
+    .sidebar__link {
+        padding: 0.55rem 0.9rem;
+        white-space: nowrap;
+    }
+
+    .topbar {
+        position: static;
+        padding-inline: 1rem;
+    }
+
+    .page-head,
+    .page-body {
+        padding-inline: 1rem;
+    }
+
+    .tabs {
+        padding-inline: 1rem;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .list-card {
+        flex-direction: column;
+        align-items: flex-start;
+        border-radius: var(--radius-md);
+    }
+
+    /* Candidate: platform text drops below the name. */
+    .candidate {
+        grid-template-columns: 1.5rem 3rem minmax(0, 1fr);
+        border-radius: var(--radius-md);
+    }
+
+    .candidate__avatar {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .candidate__platform {
+        grid-column: 1 / -1;
+        padding: 0.75rem 0 0;
+        border-top: 2px solid var(--line);
+        border-left: 0;
+    }
+
+    .summary-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        border-radius: var(--radius-md);
+    }
+
+    .summary-row__candidate {
+        padding-left: 0;
+        border-left: 0;
+    }
+
+    .settings-row {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+    }
+
+    .settings-card--inline {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 700px) {
+    .list-card__actions {
+        flex-wrap: wrap;
+    }
+
+    .positions-row,
+    .candidate-form {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .candidate-section__head {
+        flex-wrap: wrap;
+    }
+
+    .invite-card {
+        padding: 1.5rem 1.25rem;
+    }
+}

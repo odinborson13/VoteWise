@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | VoteWise</title>
+    <meta name="description" content="VoteWise is a student election management system for Quezon City University." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+@* BodyClass lets each view pick a page style: "page-landing" or "page-auth". *@
+<body class="@(ViewData["BodyClass"] ?? "page-auth")">
+
+    <partial name="_Header" />
+
+    <main id="main-content">
+        @RenderBody()
+    </main>
+
+    @* Optional per-page footer (used by the landing page). *@
+    @await RenderSectionAsync("Footer", required: false)
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+@{
+    ViewData["Title"] = "Invite Student";
+    ViewData["ActiveNav"] = "Members";
+}
+
+<section class="page-body">
+
+    <a class="back-link" asp-action="Members">
+        @Html.Icon("arrow-left")
+        <span>Back to Join Requests</span>
+    </a>
+
+    <header class="detail-head">
+        <h1 class="detail-head__title">Invite Student</h1>
+    </header>
+
+    @* Front-end only: no invitation is sent. *@
+    <form class="invite-card" method="post" asp-action="InviteStudent">
+        <label class="invite-card__label" for="studentNumber">Input Student Number</label>
+        <input class="field-block__input field-block__input--plain" id="studentNumber" name="studentNumber" type="text" autocomplete="off" />
+        <button type="submit" class="btn btn--gold">Invite</button>
+    </form>
+
+</section>

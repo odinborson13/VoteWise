@@ -1,0 +1,125 @@
+@{
+    ViewData["Title"] = "Home";
+    ViewData["BodyClass"] = "page-landing";
+
+    // Static content for the "Why VoteWise?" cards (front-end mock data only).
+    var features = new[]
+    {
+        (Icon: "shield",       Title: "Controlled Access",
+         Text: "Voting is conducted only through designated polling places and authorized election personnel."),
+        (Icon: "zap",          Title: "Efficient Counting",
+         Text: "Votes are automatically counted, reducing manual calculation."),
+        (Icon: "file-text",    Title: "Organized Records",
+         Text: "Voter, candidate, election, and voting information are managed through a centralized system."),
+        (Icon: "circle-check", Title: "Accurate Results",
+         Text: "The system processes recorded votes according to the configured election rules."),
+        (Icon: "monitor",      Title: "Simple Interface",
+         Text: "A straightforward voting interface helps voters and polling personnel navigate the election process."),
+        (Icon: "bar-chart",    Title: "Real-Time Administration",
+         Text: "Authorized election officials can monitor election activity and manage polling operations.")
+    };
+
+    // Static content for the polling place table.
+    var pollingPlaces = new[]
+    {
+        (Name: "Polling Place 01", Location: "San Bartolome Campus"),
+        (Name: "Polling Place 02", Location: "San Francisco Campus"),
+        (Name: "Polling Place 03", Location: "Batasan Campus")
+    };
+}
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+    <div class="container hero__inner">
+        <h1 class="hero__title">
+            A Smarter Way to<br />
+            Conduct <span class="text-gold">Elections</span>
+        </h1>
+        <p class="hero__lead">
+            VoteWise is a digital election management system designed to help schools conduct
+            organized, efficient, and reliable elections through designated polling places.
+        </p>
+        <a class="btn btn--gold btn--lg" asp-controller="Account" asp-action="SelectRole">
+            <span>Start Voting</span>
+            @Html.Icon("arrow-right")
+        </a>
+    </div>
+</section>
+
+<!-- ============ WHY VOTEWISE ============ -->
+<section class="section section--light" id="features">
+    <div class="container">
+        <header class="section__header section__header--center" id="how-it-works">
+            <h2 class="section__title">Why VoteWise?</h2>
+            <p class="section__subtitle">Built for better elections.</p>
+        </header>
+
+        <div class="feature-grid">
+            @foreach (var feature in features)
+            {
+                <article class="feature-card">
+                    <span class="feature-card__icon">@Html.Icon(feature.Icon)</span>
+                    <h3 class="feature-card__title">@feature.Title</h3>
+                    <p class="feature-card__text">@feature.Text</p>
+                </article>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ============ POLLING PLACES + RESULTS ============ -->
+<section class="section section--navy" id="polling-places">
+    <div class="container">
+        <header class="section__header">
+            <h2 class="section__title section__title--light">
+                Find Your <span class="text-gold">Polling Place</span>
+            </h2>
+            <p class="section__subtitle section__subtitle--light">
+                Voting is available only at designated polling locations.
+            </p>
+        </header>
+
+        <div class="table-card">
+            <table class="polling-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Polling Place</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var place in pollingPlaces)
+                    {
+                        <tr>
+                            <th scope="row">@place.Name</th>
+                            <td>
+                                <span class="polling-table__location">
+                                    @Html.Icon("map-pin")
+                                    @place.Location
+                                </span>
+                            </td>
+                            <td><span class="status status--open">Open</span></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <aside class="results-banner">
+            <span class="results-banner__icon">@Html.Icon("file-text")</span>
+            <div class="results-banner__body">
+                <h3 class="results-banner__title">Election Results</h3>
+                <p class="results-banner__text">Official verified election results will be published live.</p>
+            </div>
+            <a class="btn btn--gold" href="#">
+                <span>View Official Results</span>
+                @Html.Icon("chevron-right")
+            </a>
+        </aside>
+    </div>
+</section>
+
+@section Footer {
+    <partial name="_Footer" />
+}

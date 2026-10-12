@@ -1,0 +1,51 @@
+@model IReadOnlyList<string>
+
+<section class="page-body">
+
+    <a class="back-link" asp-action="CreateElection">
+        @Html.Icon("arrow-left")
+        <span>Back to Creating an Election</span>
+    </a>
+
+    @* Front-end only: nothing is saved. "Review Ballot" simply moves to the preview. *@
+    <form method="get" asp-action="ReviewBallot">
+
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            var position = Model[i];
+            var key = $"position{i}";
+
+            <section class="candidate-section" aria-labelledby="@(key)-heading">
+                <header class="candidate-section__head">
+                    <h2 class="candidate-section__title" id="@(key)-heading">@position</h2>
+                    <button type="button" class="btn btn--gold btn--sm">
+                        @Html.Icon("plus")
+                        <span>Add Candidate</span>
+                    </button>
+                </header>
+
+                <div class="candidate-form">
+                    <div class="field-block field-block--compact">
+                        <label class="field-block__sublabel" for="@(key)-studentId">Student ID</label>
+                        <input class="field-block__input field-block__input--plain" id="@(key)-studentId" name="@(key)-studentId" type="text" autocomplete="off" />
+                    </div>
+
+                    <div class="field-block field-block--compact">
+                        <label class="field-block__sublabel" for="@(key)-name">Name</label>
+                        <input class="field-block__input field-block__input--plain" id="@(key)-name" name="@(key)-name" type="text" autocomplete="off" />
+                    </div>
+
+                    <div class="field-block field-block--compact">
+                        <label class="field-block__sublabel" for="@(key)-party">Party</label>
+                        <input class="field-block__input field-block__input--plain" id="@(key)-party" name="@(key)-party" type="text" autocomplete="off" />
+                    </div>
+                </div>
+            </section>
+        }
+
+        <div class="center-actions">
+            <button type="submit" class="btn btn--gold btn--lg">Review Ballot</button>
+        </div>
+    </form>
+
+</section>
